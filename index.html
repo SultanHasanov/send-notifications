@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Push Notification Demo</title>
+  <!-- Подключаем библиотеку OneSignal -->
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+  <script>
+    // Инициализируем OneSignal
+    window.OneSignal = window.OneSignal || [];
+    OneSignal.push(function() {
+      OneSignal.init({
+        appId: 'YOUR_ONESIGNAL_APP_ID', // Замените на свой ID приложения OneSignal
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Отправка Push-уведомлений</h1>
+  <textarea id="notificationText" placeholder="Введите текст уведомления"></textarea>
+  <button onclick="sendNotification()">Отправить уведомление</button>
+
+  <script>
+    function sendNotification() {
+      const notificationText = document.getElementById('notificationText').value;
+
+      // Отправляем уведомление через OneSignal
+      OneSignal.push(function() {
+        OneSignal.sendSelfNotification(
+          /* заголовок уведомления */ notificationText,
+          /* дополнительные параметры, например, URL перехода */
+          { /* additional data */ },
+          /* подписанные теги (необязательно) */
+          ['tag1', 'tag2'],
+          function() {
+            console.log('Уведомление успешно отправлено!');
+          },
+          function(error) {
+            console.error('Ошибка при отправке уведомления:', error);
+          }
+        );
+      });
+    }
+  </script>
+</body>
+</html>
