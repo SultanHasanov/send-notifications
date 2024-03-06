@@ -27,20 +27,19 @@
 
       // Отправляем уведомление через OneSignal
       OneSignal.push(function() {
-        OneSignal.setNotificationOpenedHandler(function(jsonData) {
-          console.log('Пользователь открыл уведомление: ', jsonData);
+        OneSignal.getUserId().then(function(userId) {
+          OneSignal.sendSelfNotification(
+            notificationText,
+            { headings: { en: 'Заголовок уведомления' } },
+            { notificationId: userId },
+            function(notificationId, success) {
+              console.log('Уведомление успешно отправлено:', notificationId, success);
+            },
+            function(error) {
+              console.error('Ошибка при отправке уведомления:', error);
+            }
+          );
         });
-
-        // Отправляем уведомление
-        OneSignal.sendSelfNotification(
-          notificationText,
-          function(notificationId, success) {
-            console.log('Уведомление успешно отправлено:', notificationId, success);
-          },
-          function(error) {
-            console.error('Ошибка при отправке уведомления:', error);
-          }
-        );
       });
     }
   </script>
