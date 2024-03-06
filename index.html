@@ -6,15 +6,15 @@
   <title>Push Notification Demo</title>
   <!-- Подключаем библиотеку OneSignal -->
   <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-  <script>
-    // Инициализируем OneSignal
-    window.OneSignal = window.OneSignal || [];
-    OneSignal.push(function() {
-      OneSignal.init({
-        appId: 'YOUR_ONESIGNAL_APP_ID', // Замените на свой ID приложения OneSignal
-      });
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(function(OneSignal) {
+    OneSignal.init({
+      appId: "81cd0845-8acd-4990-809f-b461f05aa9b8",
     });
-  </script>
+  });
+</script>
 </head>
 <body>
   <h1>Отправка Push-уведомлений</h1>
